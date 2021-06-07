@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+}
+
+model LogAccess { 
+  logAccessId Int @id @default(autoincrement())
+  logAccessUserId Int 
+  logAccessMethod String
+  logAccessUrl    String
+  logAccessYear Int
+  logAccessMonth Int
+  logAccessDay Int
+  logAccessCreated_at DateTime @default(now())
+}
+
+model User { 
+  userId Int @id @default(autoincrement())
+  userName String
+  userEmail String @unique
+  userPassword String
+  userIsBlocked Boolean @default(false)
+  userIsActive Boolean @default(true)
+  userCanChangePassword Boolean @default(true)
+  userCreated_at DateTime @default(now())
+  userUpdated_at DateTime @updatedAt @default(now())
+}
