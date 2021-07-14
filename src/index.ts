@@ -1,12 +1,12 @@
 // -- Basic imports
+import 'dotenv/config'
 import express, { json, NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
 import AppErrors from './config/AppErrors'
 import routes from './route'
-require('dotenv-safe').config()
 
-const serverUrl = 'http://localhost'
-const serverPort = 3000
+const serverUrl = process.env.SERVER_URL
+const serverPort = process.env.SERVER_PORT
 const app = express()
 
 app.use(json())
